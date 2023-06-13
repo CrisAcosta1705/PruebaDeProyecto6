@@ -1,4 +1,4 @@
-package Proyecto;
+ackage Proyecto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +36,8 @@ public class Inventario {
     public void mostrarMenu() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
+        boolean salir = false;
+
         do {
             System.out.println("==== MENÚ DEL INVENTARIO ====");
             System.out.println("1. Registrar producto");
@@ -63,6 +65,7 @@ public class Inventario {
                         break;
                     case 5:
                         System.out.println("Saliendo del programa...");
+                        salir = true;
                         break;
                     default:
                         System.out.println("Opción inválida. Por favor, seleccione nuevamente.");
@@ -73,7 +76,9 @@ public class Inventario {
                 scanner.nextLine();
                 opcion = 0;
             }
-        } while (opcion != 5);
+        } while (!salir);
+
+        Login.mostrarLogin(null); 
     }
 
     public void registrarProducto() {
@@ -198,7 +203,7 @@ public class Inventario {
                 LocalDate fechaVenta = LocalDate.now();
 
                 double gananciasVenta = cantidad * productoEncontrado.getPrecio();
-                Venta venta = new Venta(nombre, fechaVenta, cantidad, gananciasVenta);
+                Venta venta = new Venta(nombre, fechaVenta, cantidad, gananciasVenta, nombre);
 
                 agregarVenta(venta); 
             } else {
